@@ -1,0 +1,29 @@
+<!DOCTYPE html>                                                                                                                       
+  <html>                                                                           
+  <head>                                                                                                                                
+    <meta charset="UTF-8">                                                         
+    <title>Join on Movista</title>            
+    <meta name="viewport" content="width=device-width, initial-scale=1">                                                                
+    <style>                                                        
+      body { font-family: -apple-system, sans-serif; text-align: center; padding: 60px 20px; background: #0D0B1E; color: #fff; }        
+      h1 { font-size: 24px; }                                                      
+      p { color: #9896B0; }                                                                                                             
+      a { display: inline-block; margin-top: 24px; padding: 14px 28px; background: #534AB7; color: white; border-radius: 12px;
+  text-decoration: none; font-weight: 600; }                       
+    </style>                                             
+  </head>                                                          
+  <body>                                                 
+    <h1>You've been invited to a group</h1>                                                                                             
+    <p>Open Movista to join, or install it first from TestFlight.</p>
+    <a href="https://https://testflight.apple.com/join/SnAeJnzV">Get Movista on TestFlight</a>                                      
+    <script>                                                                       
+      // Try to open the app — if installed, iOS intercepts before this page loads anyway                                               
+      // This script runs only when the app is not installed                                                                            
+      const code = new URLSearchParams(window.location.search).get('code');                                                             
+      if (code) {                                                                                                                       
+        document.querySelector('a').href =                                         
+          'https://testflight.apple.com/join/SnAeJnzV';                                                                     
+      }                                                                                                                                 
+    </script>                                 
+  </body>                                                                                                                               
+</html>
