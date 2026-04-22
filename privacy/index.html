@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movista — Privacy Policy</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0f0f13;
+      color: #e2e2f0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      padding: 48px 24px 80px;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    header {
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #e2e2f0;
+      margin-bottom: 14px;
+    }
+
+    .effective-date {
+      display: inline-block;
+      font-size: 13px;
+      color: #8888a8;
+      background-color: rgba(124, 106, 247, 0.12);
+      border: 1px solid #2e2e3d;
+      border-radius: 999px;
+      padding: 4px 14px;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #7c6af7;
+      border-top: 1px solid #2e2e3d;
+      padding-top: 28px;
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: #e2e2f0;
+      margin-bottom: 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-intro {
+      color: #8888a8;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+
+    code {
+      font-family: "SF Mono", "Fira Mono", "Courier New", monospace;
+      font-size: 13px;
+      background-color: rgba(124, 106, 247, 0.1);
+      border: 1px solid #2e2e3d;
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: #b8b0f7;
+    }
+
+    a {
+      color: #7c6af7;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Contact block ── */
+    .contact-block {
+      margin-top: 48px;
+      padding: 20px 24px;
+      border: 1px solid #2e2e3d;
+      border-radius: 12px;
+      background-color: rgba(124, 106, 247, 0.06);
+      color: #8888a8;
+      font-size: 15px;
+    }
+
+    .contact-block a {
+      color: #7c6af7;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 720px) {
+      body {
+        font-size: 15px;
+        padding: 32px 20px 64px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Movista — Privacy Policy</h1>
+      <span class="effective-date">Effective April 22, 2026</span>
+    </header>
+
+    <article>
+
+      <section id="overview">
+        <h2>1. Overview</h2>
+        <p>Movista is an iOS app that helps you track the movies and shows you have watched, build a watchlist, and discover new titles through AI-powered recommendations and friend suggestions. This policy explains what personal information Movista collects, how it is used, and what choices you have. We collect only what is necessary to provide the service and do not sell, rent, or share your personal information with advertisers or data brokers.</p>
+      </section>
+
+      <section id="information-we-collect">
+        <h2>2. Information We Collect</h2>
+        <p class="section-intro">We collect information you provide directly and a small amount of data generated automatically by the app.</p>
+
+        <p><strong>Information you provide:</strong></p>
+        <ul>
+          <li><strong>Email address</strong> — required for account creation; must be verified before you can log in.</li>
+          <li><strong>Username</strong> — required, unique, minimum 3 characters.</li>
+          <li><strong>Display name</strong> — required.</li>
+          <li><strong>Profile photo</strong> — optional; selected by you using the iOS Photos picker. We access only the single image you choose.</li>
+          <li><strong>Bio</strong> — optional short freeform text.</li>
+          <li><strong>Diary entries</strong> — movie and show title references, personal ratings (multi-dimensional scales), and watch dates. Diary entries are private to your account and are not visible to other users.</li>
+          <li><strong>Watchlist</strong> — references to movies you want to watch.</li>
+          <li><strong>Streaming platform preferences</strong> — which services you subscribe to, selected from a preset list.</li>
+          <li><strong>Friend graph</strong> — user IDs of accepted friends and pending requests.</li>
+          <li><strong>Group membership</strong> — user IDs of shared watch groups you belong to.</li>
+          <li><strong>Movie suggestions</strong> — suggestions sent between friends contain a movie ID and sender/recipient IDs only; no freeform message text.</li>
+        </ul>
+
+        <p><strong>Information collected automatically:</strong></p>
+        <ul>
+          <li><strong>Firebase User ID</strong> — a unique identifier automatically assigned to your account by Firebase Authentication.</li>
+          <li><strong>App Check attestation token</strong> — a device attestation token generated by Apple's App Attest framework to verify that requests originate from a genuine instance of the Movista app on a real device. This token is used solely for request authenticity verification and is not stored long-term.</li>
+          <li><strong>Daily AI usage counters</strong> — numeric counters that track how many AI requests you have made today, used to enforce per-user rate limits. Counters reset at midnight UTC.</li>
+          <li><strong>Aggregated taste profile</strong> — a summary derived from your own ratings, used to generate personalized AI recommendations. This is not a separate data collection; it is computed from data you have already provided.</li>
+        </ul>
+
+        <p><strong>Information we do not collect:</strong></p>
+        <ul>
+          <li>No advertising identifier (IDFA) or cross-app tracking.</li>
+          <li>No location data.</li>
+          <li>No access to your contacts, calendar, or photo library beyond the single profile photo you select.</li>
+          <li>No health, financial, payment, or biometric data.</li>
+          <li>No third-party analytics SDKs (no Mixpanel, Amplitude, Segment, Google Analytics, Facebook SDK, or equivalent).</li>
+        </ul>
+      </section>
+
+      <section id="how-we-use">
+        <h2>3. How We Use Your Information</h2>
+        <ul>
+          <li><strong>Account and authentication</strong> — your email, username, and display name identify you and allow you to log in.</li>
+          <li><strong>Core features</strong> — your diary, watchlist, and ratings power the tracking, compatibility scoring, and friend-suggestion features.</li>
+          <li><strong>AI recommendations</strong> — your aggregated taste profile and any prompt you type are sent to the Claude API to generate movie recommendations. See Section 4 for how this is handled.</li>
+          <li><strong>Rate limiting</strong> — daily AI counters prevent abuse of the AI recommendation feature.</li>
+          <li><strong>Friend and group features</strong> — your friend graph and group membership enable the social features of the app.</li>
+          <li><strong>Content moderation</strong> — reports you submit are used to review and act on policy violations.</li>
+          <li><strong>Service integrity</strong> — App Check tokens verify that API requests come from the genuine app.</li>
+        </ul>
+      </section>
+
+      <section id="third-party-services">
+        <h2>4. Third-Party Services</h2>
+        <p class="section-intro">The following third-party services receive data as part of operating Movista.</p>
+
+        <p><strong>Firebase (Google LLC)</strong> — Firebase hosts all user data through its Authentication, Firestore, Cloud Storage, Cloud Functions, and App Check products. All data described in Section 2 is stored in Firebase infrastructure.
+        <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy</a>.</p>
+
+        <p><strong>Anthropic (Claude API)</strong> — When you request AI recommendations, your aggregated taste profile and any prompt you type are sent to the Claude API. Your email address, username, profile photo, and friend relationships are never sent. Requests are routed through a Firebase Cloud Function proxy; no identifying headers leave our infrastructure.
+        <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic Privacy Policy</a>.</p>
+
+        <p><strong>The Movie Database (TMDB)</strong> — Movie search terms and lookup IDs are sent to TMDB to retrieve metadata such as titles, posters, and ratings. No personal data is sent to TMDB.
+        <a href="https://www.themoviedb.org/privacy-policy" target="_blank" rel="noopener">TMDB Privacy Policy</a>.</p>
+
+        <p><strong>Gmail / Google LLC (SMTP)</strong> — When a user submits a content report, a notification email is sent to the developer at movista.mazani@gmail.com via Gmail SMTP. No user data beyond what is included in the submitted report is transmitted through this channel.</p>
+      </section>
+
+      <section id="data-retention">
+        <h2>5. Data Retention</h2>
+        <ul>
+          <li><strong>Active accounts</strong> — data is retained for as long as your account exists.</li>
+          <li><strong>Deleted accounts</strong> — data is erased immediately when you delete your account. Residual copies in backups are purged within 30 days.</li>
+          <li><strong>Content reports</strong> — retained for 12 months after resolution (resolved means the report was dismissed, the content was removed, or the reported account was actioned), then automatically deleted.</li>
+          <li><strong>Daily AI counters</strong> — reset at midnight UTC each day.</li>
+        </ul>
+      </section>
+
+      <section id="your-rights">
+        <h2>6. Your Rights</h2>
+        <p><strong>Account deletion</strong> — you can delete your account at any time in-app at Profile → Settings → Delete Account. Deletion permanently removes your diary, watchlist, ratings, taste profile, groups you created, and all references to you in other users' friend lists, group member lists, and pending requests.</p>
+
+        <p><strong>Data access</strong> — you may request a copy of your stored data by emailing <a href="mailto:movista.mazani@gmail.com">movista.mazani@gmail.com</a>.</p>
+
+        <p><strong>Data correction</strong> — most user-editable fields (display name, bio, profile photo, streaming preferences, and ratings) can be updated directly in the app.</p>
+
+        <p><strong>EU and UK residents (GDPR)</strong> — you have the right to access, rectify, erase, port, and object to the processing of your personal data. To exercise these rights, email <a href="mailto:movista.mazani@gmail.com">movista.mazani@gmail.com</a>.</p>
+
+        <p><strong>California residents (CCPA/CPRA)</strong> — you have the right to know what personal information is collected, to request deletion, and to opt out of the sale of personal information. Movista does not sell or share personal information. To exercise other rights, email <a href="mailto:movista.mazani@gmail.com">movista.mazani@gmail.com</a>.</p>
+      </section>
+
+      <section id="blocking-reporting">
+        <h2>7. Blocking, Reporting, and Content Moderation</h2>
+        <p>Movista provides in-app tools to block other users and to report users or groups that violate our guidelines. When you submit a report, the report document (including your user ID, the reported user or group ID, the selected reason, and any optional note you provide) is stored in Firestore and triggers a notification to the developer. Reports are reviewed within 24 hours in accordance with Apple App Store Guideline 1.2.</p>
+        <p>Blocking a user removes the friendship between you, hides each user from the other's friend search results and suggestions, and prevents further interaction within the app. Block relationships are stored server-side and enforced by Firestore security rules.</p>
+      </section>
+
+      <section id="childrens-privacy">
+        <h2>8. Children's Privacy</h2>
+        <p>Movista is rated 12+ on the App Store. We do not knowingly collect personal information from children under 13. If we learn that an account belongs to a child under 13, we will remove the account and all associated data. Parents or guardians who believe their child has created an account may contact us at <a href="mailto:movista.mazani@gmail.com">movista.mazani@gmail.com</a> to request removal.</p>
+      </section>
+
+      <section id="changes">
+        <h2>9. Changes to This Policy</h2>
+        <p>We may update this policy from time to time. When we do, we will revise the effective date at the top of the page. For material changes, we will notify users through the app or by email. Continued use of Movista after a change constitutes acceptance of the updated policy.</p>
+      </section>
+
+      <section id="contact">
+        <h2>10. Contact</h2>
+        <p>If you have questions about this policy or wish to exercise any of your rights, please email us at <a href="mailto:movista.mazani@gmail.com">movista.mazani@gmail.com</a>. We will respond within a reasonable time.</p>
+      </section>
+
+    </article>
+
+    <div class="contact-block">
+      Questions? Email <a href="mailto:movista.mazani@gmail.com">movista.mazani@gmail.com</a>
+    </div>
+
+  </main>
+</body>
+</html>
