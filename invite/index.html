@@ -105,6 +105,15 @@
       line-height: 1.5;
       margin-top: 12px;
     }
+    .inviter {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #9896B0;
+      margin-bottom: 20px;
+    }
+    .inviter strong { color: #FFFFFF; }
     .hidden { display: none; }
   </style>
 </head>
@@ -112,7 +121,10 @@
   <div class="card">
     <div class="icon">🎬</div>
     <h1>You're invited to Movista</h1>
-    <p class="subtitle">Track what you watch, discover new favourites, and share movie moments with friends.</p>
+    <p class="subtitle" id="subtitle">Track what you watch, discover new favourites, and share movie moments with friends.</p>
+
+    <!-- Inviter name — shown when ?from= is present -->
+    <p class="inviter hidden" id="inviterLine">👤 Invited by <strong id="inviterName"></strong></p>
 
     <!-- Code badge: shown only when ?ref= param is present -->
     <div class="code-badge hidden" id="codeBadge">
@@ -166,6 +178,12 @@
     (function () {
       var params = new URLSearchParams(window.location.search);
       ref = (params.get("ref") || "").trim().toUpperCase();
+      var from = (params.get("from") || "").trim();
+
+      if (from) {
+        document.getElementById("inviterName").textContent = from;
+        document.getElementById("inviterLine").classList.remove("hidden");
+      }
 
       if (ref) {
         // Show invite code badge
