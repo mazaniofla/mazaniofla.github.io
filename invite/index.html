@@ -154,20 +154,20 @@
       </div>
     </div>
 
-    <!-- "Open in Movista" — shown when app is already installed -->
-    <button class="cta-btn hidden" id="openBtn" onclick="openApp()">
-      Open in Movista
-    </button>
+    <!-- Step 1: Get TestFlight -->
+    <a class="cta-btn" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">
+      Get TestFlight
+    </a>
 
-    <!-- Install Movista via TestFlight — primary CTA -->
-    <a class="cta-btn" id="movistaTfBtn" href="https://testflight.apple.com/join/SnAeJnzV" target="_blank">
+    <!-- Step 2: Install Movista -->
+    <a class="cta-btn secondary" id="movistaTfBtn" href="https://testflight.apple.com/join/SnAeJnzV" target="_blank">
       Install Movista
     </a>
 
-    <!-- Get TestFlight app — secondary, for people who don't have it yet -->
-    <a class="cta-btn secondary" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">
-      Get TestFlight first
-    </a>
+    <!-- Step 3: Open in Movista — shown once app is installed -->
+    <button class="cta-btn secondary hidden" id="openBtn" onclick="openApp()">
+      Open in Movista
+    </button>
 
     <p class="note" id="noteText">Movista is currently in beta — TestFlight is required to install it on your iPhone.</p>
   </div>
@@ -190,10 +190,8 @@
         document.getElementById("codeValue").textContent = ref;
         document.getElementById("codeBadge").classList.remove("hidden");
 
-        // Show "Open in Movista" as the primary button; demote install buttons
+        // Show "Open in Movista" button (already installed path)
         document.getElementById("openBtn").classList.remove("hidden");
-        document.getElementById("movistaTfBtn").classList.add("secondary");
-        document.getElementById("movistaTfBtn").textContent = "Install Movista (TestFlight)";
 
         // Auto-attempt deep link — opens app if installed, silently fails if not
         setTimeout(tryOpenApp, 600);
