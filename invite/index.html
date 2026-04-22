@@ -124,30 +124,40 @@
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-text">
-          <strong>Install Movista via TestFlight.</strong><br/>
-          TestFlight is Apple's free beta-testing app — tap the button below to get it.
+          <strong>Get TestFlight</strong> — Apple's free app for installing betas.
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-text">
-          <strong>Create your account.</strong><br/>
-          You'll need an invite code to sign up. Tap <em>Open in Movista</em> above after installing — the code will be pre-filled automatically.
+          <strong>Install Movista</strong> via the TestFlight link below.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Come back and tap this link again.</strong><br/>
+          The app will open and your invite code will be pre-filled.
         </div>
       </div>
     </div>
 
-    <!-- "Open in Movista" — primary when app might be installed -->
+    <!-- "Open in Movista" — shown when app is already installed -->
     <button class="cta-btn hidden" id="openBtn" onclick="openApp()">
       Open in Movista
     </button>
 
-    <!-- TestFlight link — always present -->
-    <a class="cta-btn" id="tfBtn" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">
-      Get TestFlight
+    <!-- Install Movista via TestFlight — primary CTA -->
+    <a class="cta-btn" id="movistaTfBtn" href="https://testflight.apple.com/join/SnAeJnzV" target="_blank">
+      Install Movista
     </a>
 
-    <p class="note" id="noteText">Movista is currently in beta. TestFlight is required to install it on your iPhone.</p>
+    <!-- Get TestFlight app — secondary, for people who don't have it yet -->
+    <a class="cta-btn secondary" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">
+      Get TestFlight first
+    </a>
+
+    <p class="note" id="noteText">Movista is currently in beta — TestFlight is required to install it on your iPhone.</p>
   </div>
 
   <script>
@@ -162,19 +172,12 @@
         document.getElementById("codeValue").textContent = ref;
         document.getElementById("codeBadge").classList.remove("hidden");
 
-        // Show "Open in Movista" button
+        // Show "Open in Movista" as the primary button; demote install buttons
         document.getElementById("openBtn").classList.remove("hidden");
+        document.getElementById("movistaTfBtn").classList.add("secondary");
+        document.getElementById("movistaTfBtn").textContent = "Install Movista (TestFlight)";
 
-        // Demote TestFlight button to secondary style
-        document.getElementById("tfBtn").classList.add("secondary");
-        document.getElementById("tfBtn").textContent = "Don't have the app? Get TestFlight";
-
-        // Update note
-        document.getElementById("noteText").textContent =
-          "If the app is already installed, tap "Open in Movista" above. " +
-          "Otherwise get TestFlight first, install Movista, then come back and tap this link again.";
-
-        // Auto-attempt deep link after a short delay (won't do anything if app not installed)
+        // Auto-attempt deep link — opens app if installed, silently fails if not
         setTimeout(tryOpenApp, 600);
       }
     })();
