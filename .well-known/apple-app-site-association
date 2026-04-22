@@ -1,10 +1,11 @@
-{                                                                                                                                     
-    "applinks": {                                                                  
-      "details": [{                                                                                                                     
+{
+    "applinks": {
+      "details": [{
         "appIDs": ["3SYP72CWZ3.com.mazani.Cinemate"],
-        "components": [                                                                                                                 
-          { "/": "/group/join*", "comment": "Group invite links" }                                                                      
-        ]                                                                                                                               
-      }]                                                                                                                                
-    }                                                                                                                                   
+        "components": [
+          { "/": "/group/join*", "comment": "Group invite links" },
+          { "/": "/invite*",     "comment": "App invite links"   }
+        ]
+      }]
+    }
 }

@@ -25,31 +25,41 @@
       width: 100%;
       text-align: center;
     }
-    .icon {
-      font-size: 56px;
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+    .icon { font-size: 56px; margin-bottom: 16px; }
+    h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
     .subtitle {
       color: #9896B0;
       font-size: 15px;
       line-height: 1.5;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
-    .steps {
-      text-align: left;
-      margin-bottom: 32px;
+
+    /* Invite code badge — shown when ?ref= is present */
+    .code-badge {
+      background: #13103A;
+      border: 1px solid #534AB7;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
     }
-    .step {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 20px;
+    .code-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #9896B0;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
+    .code-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #534AB7;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .steps { text-align: left; margin-bottom: 28px; }
+    .step { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
     .step-num {
       background: #534AB7;
       color: white;
@@ -64,14 +74,9 @@
       flex-shrink: 0;
       margin-top: 1px;
     }
-    .step-text {
-      font-size: 14px;
-      line-height: 1.55;
-      color: #D4D2E8;
-    }
-    .step-text strong {
-      color: #FFFFFF;
-    }
+    .step-text { font-size: 14px; line-height: 1.55; color: #D4D2E8; }
+    .step-text strong { color: #FFFFFF; }
+
     .cta-btn {
       display: block;
       background: #534AB7;
@@ -81,15 +86,26 @@
       font-weight: 600;
       padding: 14px 24px;
       border-radius: 14px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       transition: opacity 0.15s;
+      cursor: pointer;
+      border: none;
+      width: 100%;
     }
     .cta-btn:hover { opacity: 0.85; }
+    .cta-btn.secondary {
+      background: transparent;
+      border: 1px solid #534AB7;
+      color: #9896B0;
+      font-size: 14px;
+    }
     .note {
       font-size: 12px;
       color: #9896B0;
       line-height: 1.5;
+      margin-top: 12px;
     }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
@@ -97,6 +113,12 @@
     <div class="icon">🎬</div>
     <h1>You're invited to Movista</h1>
     <p class="subtitle">Track what you watch, discover new favourites, and share movie moments with friends.</p>
+
+    <!-- Code badge: shown only when ?ref= param is present -->
+    <div class="code-badge hidden" id="codeBadge">
+      <div class="code-label">Your invite code</div>
+      <div class="code-value" id="codeValue"></div>
+    </div>
 
     <div class="steps">
       <div class="step">
@@ -110,22 +132,62 @@
         <div class="step-num">2</div>
         <div class="step-text">
           <strong>Create your account.</strong><br/>
-          When you reach the sign-up screen, enter the referral code from your invite link (it will be pre-filled automatically if you tap this page again after installing).
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-text">
-          <strong>Come back and tap this link again.</strong><br/>
-          After you've installed the app and signed in, tap your original invite link one more time — the app will open and your referral will be applied.
+          You'll need an invite code to sign up. Tap <em>Open in Movista</em> above after installing — the code will be pre-filled automatically.
         </div>
       </div>
     </div>
 
-    <a class="cta-btn" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">
+    <!-- "Open in Movista" — primary when app might be installed -->
+    <button class="cta-btn hidden" id="openBtn" onclick="openApp()">
+      Open in Movista
+    </button>
+
+    <!-- TestFlight link — always present -->
+    <a class="cta-btn" id="tfBtn" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">
       Get TestFlight
     </a>
-    <p class="note">Movista is currently in beta. TestFlight is required to install it on your iPhone.</p>
+
+    <p class="note" id="noteText">Movista is currently in beta. TestFlight is required to install it on your iPhone.</p>
   </div>
+
+  <script>
+    var ref = null;
+
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      ref = (params.get("ref") || "").trim().toUpperCase();
+
+      if (ref) {
+        // Show invite code badge
+        document.getElementById("codeValue").textContent = ref;
+        document.getElementById("codeBadge").classList.remove("hidden");
+
+        // Show "Open in Movista" button
+        document.getElementById("openBtn").classList.remove("hidden");
+
+        // Demote TestFlight button to secondary style
+        document.getElementById("tfBtn").classList.add("secondary");
+        document.getElementById("tfBtn").textContent = "Don't have the app? Get TestFlight";
+
+        // Update note
+        document.getElementById("noteText").textContent =
+          "If the app is already installed, tap "Open in Movista" above. " +
+          "Otherwise get TestFlight first, install Movista, then come back and tap this link again.";
+
+        // Auto-attempt deep link after a short delay (won't do anything if app not installed)
+        setTimeout(tryOpenApp, 600);
+      }
+    })();
+
+    function openApp() {
+      tryOpenApp();
+    }
+
+    function tryOpenApp() {
+      if (!ref) return;
+      // Custom scheme — opens app if installed, silently fails if not
+      window.location.href = "movista://invite?ref=" + encodeURIComponent(ref);
+    }
+  </script>
 </body>
 </html>
