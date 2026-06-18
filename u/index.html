@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add me on Movista</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0D0B1E;
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #1E1A3F;
+      border: 1px solid #252050;
+      border-radius: 24px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    .icon { font-size: 56px; margin-bottom: 16px; }
+    h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle {
+      color: #9896B0;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .steps { text-align: left; margin-bottom: 28px; }
+    .step { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+    .step-num {
+      background: #534AB7;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text { font-size: 14px; line-height: 1.55; color: #D4D2E8; }
+    .step-text strong { color: #FFFFFF; }
+
+    .cta-btn {
+      display: block;
+      background: #534AB7;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      transition: opacity 0.15s;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    .cta-btn.secondary {
+      background: transparent;
+      border: 1px solid #534AB7;
+      color: #9896B0;
+      font-size: 14px;
+    }
+    .note {
+      font-size: 12px;
+      color: #9896B0;
+      line-height: 1.5;
+      margin-top: 12px;
+    }
+    .inviter {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #9896B0;
+      margin-bottom: 20px;
+    }
+    .inviter strong { color: #FFFFFF; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">👋</div>
+    <h1 id="title">Add me on Movista</h1>
+    <p class="subtitle">See my film taste and send me a friend request on Movista.</p>
+
+    <!-- Profile owner's name — shown when ?from= is present -->
+    <p class="inviter hidden" id="inviterLine">👤 From <strong id="inviterName"></strong></p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Get TestFlight</strong> — Apple's free app for installing betas.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Install Movista</strong> via the TestFlight link below.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Come back and tap this link again.</strong><br/>
+          Movista will open to my profile — tap <strong>Add Friend</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 1: Get TestFlight -->
+    <a class="cta-btn" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">
+      Get TestFlight
+    </a>
+
+    <!-- Step 2: Install Movista -->
+    <a class="cta-btn" id="movistaTfBtn" href="https://testflight.apple.com/join/SnAeJnzV" target="_blank">
+      Install Movista
+    </a>
+
+    <!-- Step 3: Open in Movista — shown once app is installed -->
+    <button class="cta-btn hidden" id="openBtn" onclick="openApp()">
+      Open in Movista
+    </button>
+
+    <p class="note">Movista is currently in beta — TestFlight is required to install it on your iPhone.</p>
+  </div>
+
+  <script>
+    var id = null;
+
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      id = (params.get("id") || "").trim();
+      var from = (params.get("from") || "").trim();
+
+      if (from) {
+        document.getElementById("inviterName").textContent = from;
+        document.getElementById("inviterLine").classList.remove("hidden");
+        document.getElementById("title").textContent = "Add " + from + " on Movista";
+      }
+
+      if (id) {
+        // Show "Open in Movista" button (already installed path)
+        document.getElementById("openBtn").classList.remove("hidden");
+
+        // Auto-attempt deep link — opens app if installed, silently fails if not
+        setTimeout(tryOpenApp, 600);
+      }
+    })();
+
+    function openApp() {
+      tryOpenApp();
+    }
+
+    function tryOpenApp() {
+      if (!id) return;
+      // Custom scheme — opens app if installed, silently fails if not
+      window.location.href = "movista://user?id=" + encodeURIComponent(id);
+    }
+  </script>
+</body>
+</html>
