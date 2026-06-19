@@ -59,10 +59,12 @@
     }
     .divider::before { background: linear-gradient(90deg, transparent, #534AB7); }
     .divider::after  { background: linear-gradient(90deg, #534AB7, transparent); }
-    .divider span {
-      font-size: 15px; line-height: 1;
-      filter: drop-shadow(0 0 6px rgba(83, 74, 183, 0.6));
+    .divider-logo {
+      width: 40px; height: 40px; border-radius: 9px; display: block;
+      filter: drop-shadow(0 0 8px rgba(83, 74, 183, 0.6));
     }
+
+    .join-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; text-align: center; }
 
     h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
     .subtitle { color: #9896B0; font-size: 14px; line-height: 1.5; margin-bottom: 22px; }
@@ -96,6 +98,8 @@
       font-size: 15px; font-weight: 600; padding: 12px 20px; border-radius: 12px;
       margin: 0 0 24px 42px; transition: opacity 0.15s; cursor: pointer;
       border: none; text-align: center;
+      /* Explicit width so a <button> fills the same as the <a> buttons (buttons size to content otherwise). */
+      width: calc(100% - 42px);
     }
     .cta-btn:hover { opacity: 0.85; }
 
@@ -121,7 +125,8 @@
     <!-- <p class="subtitle">See my film taste and send me a friend request on Movista.</p> -->
 
     <!-- Cool separator between the profile/visual and the invitation steps -->
-    <div id="divider" class="divider hidden"><span>🎬</span></div>
+    <div id="divider" class="divider hidden"><img class="divider-logo" src="movista-logo.png" alt="Movista" /></div>
+    <h1 class="join-title">Join Movista</h1>
 
     <!-- Invite code badge: shown when ?ref= is present -->
     <div class="code-badge hidden" id="codeBadge">
