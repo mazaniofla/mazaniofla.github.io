@@ -46,10 +46,22 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 40px; font-weight: 700; color: #FFFFFF; text-transform: uppercase;
     }
-    .genres { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 18px; }
+    .genres { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 4px; }
     .genre-chip {
       background: #13103A; border: 1px solid #534AB7; color: #C9C4F5;
       font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
+    }
+
+    /* Cool separator between the profile/visual and the invitation steps */
+    .divider { display: flex; align-items: center; gap: 12px; margin: 22px 2px 24px; }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 1px;
+    }
+    .divider::before { background: linear-gradient(90deg, transparent, #534AB7); }
+    .divider::after  { background: linear-gradient(90deg, #534AB7, transparent); }
+    .divider span {
+      font-size: 15px; line-height: 1;
+      filter: drop-shadow(0 0 6px rgba(83, 74, 183, 0.6));
     }
 
     h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
@@ -108,6 +120,9 @@
     <!-- <h1 id="title">Join me on Movista</h1> -->
     <!-- <p class="subtitle">See my film taste and send me a friend request on Movista.</p> -->
 
+    <!-- Cool separator between the profile/visual and the invitation steps -->
+    <div id="divider" class="divider hidden"><span>🎬</span></div>
+
     <!-- Invite code badge: shown when ?ref= is present -->
     <div class="code-badge hidden" id="codeBadge">
       <div class="code-label">Your invite code</div>
@@ -151,13 +166,17 @@
 
       if (from) {
         document.title = from + " invited you to Movista";
-        document.getElementById("title").textContent = from + " invited you to Movista";
+        var titleEl = document.getElementById("title");
+        if (titleEl) titleEl.textContent = from + " invited you to Movista";
       }
 
       // Visual: hosted taste card if available, else the lightweight preview.
       if (img) {
         var t = document.getElementById("tasteImg");
-        t.onload = function () { t.classList.remove("hidden"); };
+        t.onload = function () {
+          t.classList.remove("hidden");
+          document.getElementById("divider").classList.remove("hidden");
+        };
         t.onerror = function () { showLightweight(from, photo, g); };  // fall back if 404
         t.src = img;
       } else {
@@ -179,6 +198,7 @@
       document.getElementById("tasteImg").classList.add("hidden");
       var lw = document.getElementById("lightweight");
       lw.classList.remove("hidden");
+      document.getElementById("divider").classList.remove("hidden");
       var fallback = document.getElementById("avatarFallback");
       if (from) fallback.textContent = from.charAt(0);
       if (photo) {
