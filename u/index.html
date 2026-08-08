@@ -82,33 +82,27 @@
       font-size: 26px; font-weight: 700; letter-spacing: 0.18em; color: #534AB7;
     }
 
-    .steps { text-align: left; }
-    .step { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
-    .step-num {
-      background: #534AB7; color: white; font-size: 13px; font-weight: 700;
-      width: 28px; height: 28px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 1px;
-    }
-    .step-text { font-size: 14px; line-height: 1.55; color: #D4D2E8; }
-    .step-text strong { color: #FFFFFF; }
-
+    /* One primary action: copy the code, then hand off to TestFlight (which installs
+       itself first when the visitor doesn't have it). */
     .cta-btn {
       display: block; background: #534AB7; color: white; text-decoration: none;
-      font-size: 15px; font-weight: 600; padding: 12px 20px; border-radius: 12px;
-      margin: 0 0 24px 42px; transition: opacity 0.15s; cursor: pointer;
-      border: none; text-align: center;
-      /* Explicit width so a <button> fills the same as the <a> buttons (buttons size to content otherwise). */
-      width: calc(100% - 42px);
+      font-size: 16px; font-weight: 600; padding: 14px 24px; border-radius: 14px;
+      margin: 0 0 10px; transition: opacity 0.15s; cursor: pointer;
+      border: none; text-align: center; width: 100%;
     }
     .cta-btn:hover { opacity: 0.85; }
+    .cta-btn.secondary {
+      background: transparent; border: 1px solid #534AB7; color: #9896B0; font-size: 14px;
+    }
 
     .note { font-size: 12px; color: #9896B0; line-height: 1.5; margin-top: 4px; }
     .copy-msg {
       font-size: 13px; font-weight: 600; color: #4ADE80;
-      margin: -16px 0 24px 42px; text-align: center;
-      width: calc(100% - 42px);
+      margin: 2px 0 10px; text-align: center;
     }
+    /* "Already installed?" escape hatch — separated so it never competes with the CTA. */
+    .alt { margin-top: 22px; padding-top: 18px; border-top: 1px solid #252050; }
+    .alt-label { font-size: 12px; color: #9896B0; margin-bottom: 8px; }
     .hidden { display: none; }
   </style>
 </head>
@@ -139,28 +133,22 @@
       <div class="code-value" id="codeValue"></div>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-text"><strong>Get TestFlight</strong> — Apple's free app for installing betas.</div>
-      </div>
-      <a class="cta-btn" href="https://apps.apple.com/app/testflight/id899247664" target="_blank">Get TestFlight</a>
+    <button class="cta-btn" id="movistaTfBtn" onclick="installMovista()">Install Movista</button>
+    <div class="copy-msg hidden" id="copyMsg">✓ Invite code copied — opening TestFlight…</div>
 
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-text"><strong>Install Movista.</strong> We'll copy your invite code to the clipboard so it's applied automatically when you first open the app.</div>
-      </div>
-      <button class="cta-btn" id="movistaTfBtn" onclick="installMovista()">Install Movista</button>
-      <div class="copy-msg hidden" id="copyMsg">✓ Invite code copied — opening TestFlight…</div>
+    <p class="note">
+      <span id="noteCode" class="hidden">We'll copy your invite code so it's applied automatically
+      when you first open the app, then hand you to TestFlight — Apple's free app for betas.</span>
+      <span id="noteNoCode">Movista is in beta, so it installs through TestFlight — Apple's free
+      app for betas.</span>
+      Don't have TestFlight? The next screen installs it first, then come back here and tap the
+      button again.
+    </p>
 
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-text"><strong>Didn't connect automatically?</strong><br/>Once Movista is installed, come back here and tap below to open it and apply your invite.</div>
-      </div>
-      <button class="cta-btn hidden" id="openBtn" onclick="openApp()">Open in Movista</button>
+    <div class="alt hidden" id="altWrap">
+      <div class="alt-label">Already installed Movista?</div>
+      <button class="cta-btn secondary" id="openBtn" onclick="openApp()">Open in Movista</button>
     </div>
-
-    <p class="note">Movista is currently in beta — TestFlight is required to install it on your iPhone.</p>
   </div>
 
   <script>
@@ -197,10 +185,13 @@
       if (ref) {
         document.getElementById("codeValue").textContent = ref;
         document.getElementById("codeBadge").classList.remove("hidden");
+        // Only promise a clipboard copy when there's actually a code to copy.
+        document.getElementById("noteCode").classList.remove("hidden");
+        document.getElementById("noteNoCode").classList.add("hidden");
       }
 
       if (id) {
-        document.getElementById("openBtn").classList.remove("hidden");
+        document.getElementById("altWrap").classList.remove("hidden");
         setTimeout(tryOpenApp, 600);   // opens app if installed, silently fails if not
       }
     })();
@@ -232,9 +223,10 @@
 
     var TESTFLIGHT_URL = "https://testflight.apple.com/join/SnAeJnzV";
 
-    // Step 2: copy the invite code to the clipboard, tell the user, then (after a beat so they can
-    // read it) send them to TestFlight. On first launch the app reads the clipboard and auto-applies
-    // the code — no need to come back and tap the deep link.
+    // The page's single action: copy the invite code, tell the user, then (after a beat so they
+    // can read it) hand off to the TestFlight join link. That link installs TestFlight itself when
+    // the visitor doesn't have it, so there's no separate "Get TestFlight" step. On first launch
+    // the app reads the clipboard and auto-applies the code — no need to come back for the deep link.
     function installMovista() {
       if (ref) {
         copyCode(ref);
